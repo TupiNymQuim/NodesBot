@@ -1,7 +1,7 @@
 # Incognito Bot
 <img src="https://github.com/TupiNymQuim/incognito_bot_t/assets/95882160/145a4f4e-fcdf-47e1-aa88-b426c68ebb4c" width=200 height=200></img>
 
-## A bot for the tupinymquim channel on Telegram
+## A bot for the TupiNymQuim channels
 
 ### How to use the application:
 
