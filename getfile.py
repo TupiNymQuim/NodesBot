@@ -1,5 +1,10 @@
 def getnewmembers():
-    arq = open("newmembers.txt")
+    try:
+        arq = open("newmembers.txt")
+    except:
+        arq = open("newmembers.txt", "w+")
+        arq.write("0\n")
+        return (0)
     i = 0;
     result = (arq.read())
     size = len(result)
