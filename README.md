@@ -1,4 +1,6 @@
 # Incognito Bot
+![image](https://github.com/TupiNymQuim/incognito_bot_t/assets/95882160/145a4f4e-fcdf-47e1-aa88-b426c68ebb4c)
+
 ## A bot for the tupinymquim channel on Telegram
 
 ### How to use the application:
