@@ -1,5 +1,5 @@
 import telebot
-from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember
+from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember
 from settings import TOKEN
 
 
@@ -17,6 +17,13 @@ def send_welcome(message):
         text = text + listnewmember(size)
         size = size - 1
     bot.send_message(chat_id, f"Lista de Participantes do Sorteio:\n{text}")
+
+
+@bot.message_handler(commands=['sortear'])
+def send_welcome(message):
+    chat_id = message.chat.id
+    winner = randommember()
+    bot.send_message(chat_id, f"O Vencedor do sorteio foi: {winner}")
 
 @bot.message_handler(commands=['joined'])
 def send_welcome(message):
