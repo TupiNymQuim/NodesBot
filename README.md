@@ -19,5 +19,6 @@
 #### Prerequsites
 -  Python 3.8 or newer
 -  Google Chrome and Chrome Driver
+#### Setup
 1) Install the requirements using `pip install -r requirements.txt`
 2) Run the app using `python3 scraper.py`
