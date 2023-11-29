@@ -2,9 +2,9 @@ import random
 
 def getnewmembers():
     try:
-        arq = open("/root/newmembers.txt")
+        arq = open("/home/scraper/newmembers.txt")
     except:
-        arq = open("/root/newmembers.txt", "w+")
+        arq = open("/home/scraper/newmembers.txt", "w+")
         arq.write("0\n")
         return (0)
     i = 0;
@@ -21,15 +21,15 @@ def getnewmembers():
         return (0)
 
 def setnewmembers(value):
-    arq =  open("/root/newmembers.txt", "w+")
+    arq =  open("/home/scraper/newmembers.txt", "w+")
     arq.write(str(value) + "\n")
 
 def addnewmember(value):
-    arq = open("/root/listmembers.txt", "a+")
+    arq = open("/home/scraper/listmembers.txt", "a+")
     arq.write(value + "\n")
 
 def listnewmember(index):
-    arq = open('/root/listmembers.txt', 'r')
+    arq = open('/home/scraper/listmembers.txt', 'r')
     names = arq.readlines()
     ret = []
     for name in names:
@@ -37,7 +37,7 @@ def listnewmember(index):
     return (ret[index])
 
 def randommember():
-    arq = open('/root/listmembers.txt', 'r')
+    arq = open('~/listmembers.txt', 'r')
     names = arq.readlines()
     ret = []
     for name in names:
@@ -47,7 +47,7 @@ def randommember():
     return (winner)
 
 def eraselist():
-    arq = open('/root/listmembers.txt', 'w+')
+    arq = open('/home/scraper/listmembers.txt', 'w+')
     arq.write("")
-    new =  open("/root/newmembers.txt", "w+")
+    new =  open("/home/scraper/newmembers.txt", "w+")
     new.write("0\n")
