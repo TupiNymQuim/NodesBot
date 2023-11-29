@@ -3,7 +3,7 @@
 
 ## A bot for the TupiNymQuim channels
 
-### How to install the telegram bot:
+## How to install the telegram bot:
 
 #### Prerequisites
 - Python3.8 or newer
@@ -16,7 +16,7 @@
 4) Run the app using `python3 start.py`
 
 
-### How to use the Scraper API:
+## How to use the Scraper API:
 #### Prerequsites
 -  Python 3.8 or newer
 -  Google Chrome and Chrome Driver
