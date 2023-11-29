@@ -1,17 +1,21 @@
 import telebot
+import requests
 from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember, eraselist
 from settings import TOKEN
-from scraper import  getBS, getRoutingScore, getHourScore, getTitle
 
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['nodes'])
 def send_welcome(message):
-    bs = getBS("https://mixnet.explorers.guru/mixnode/7PvubVkboJQm881PxAJR6oBkMB6f8R1Au55tQjnmTasr")
-    routing = getRoutingScore(bs)
-    hour = getHourScore(bs)
-    title = getTitle(bs)
-    bot.reply_to(message, f"{title}\nAvgScore: {routing} HourScore: {hour}")
+    i = 0
+    text = ""
+    while (i < 6):
+        res = requests.get("http://localhost:5000/tupi" + str(i + 1))
+        temp = res.json()
+        text = text + temp.get("title") + "\n" + temp.get("routingscore") + " " + temp.get("hourscore") + "\n"
+        i = i + 1
+    bot.reply_to(message, f"{text}")
+
 @bot.message_handler(commands=['apagar'])
 def send_welcome(message):
     eraselist()
