@@ -9,11 +9,17 @@ bot = telebot.TeleBot(TOKEN)
 def send_welcome(message):
     i = 0
     text = ""
-    while (i < 6):
-        res = requests.get("http://localhost:5000/tupi" + str(i + 1))
+    if (len(message.text) < 7):
+        while (i < 6):
+            res = requests.get("http://localhost:5000/tupi" + str(i + 1))
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + temp.get("routingscore") + " " + temp.get("hourscore") + "\n"
+            i = i + 1
+    else:
+        res = requests.get("http://localhost:5000/tupi" + message.text[7])
         temp = res.json()
-        text = text + temp.get("title") + "\n" + temp.get("routingscore") + " " + temp.get("hourscore") + "\n"
-        i = i + 1
+        text = text + temp.get("title") + "\n" + "Routing Score: " + temp.get("routingscore") + "\nHour Score: " + temp.get("hourscore") + "\n"
+        
     bot.reply_to(message, f"{text}")
 
 @bot.message_handler(commands=['apagar'])
