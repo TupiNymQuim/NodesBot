@@ -15,6 +15,7 @@
 3) Set your API token  in a `.env` file
 4) Run the app using `python3 start.py`
 
+
 ### How to use the Scraper API:
 #### Prerequsites
 -  Python 3.8 or newer
