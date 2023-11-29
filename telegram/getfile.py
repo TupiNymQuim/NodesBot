@@ -15,8 +15,10 @@ def getnewmembers():
         value = value + result[i]
         i = i + 1;
 
-    return (int(value))
-
+    try:
+        return (int(value))
+    except:
+        return (0)
 
 def setnewmembers(value):
     arq =  open("/root/newmembers.txt", "w+")
@@ -43,3 +45,9 @@ def randommember():
     random.shuffle(ret)
     winner = random.choice(ret)
     return (winner)
+
+def eraselist():
+    arq = open('/root/listmembers.txt', 'w+')
+    arq.write("")
+    new =  open("/root/newmembers.txt", "w+")
+    new.write("")

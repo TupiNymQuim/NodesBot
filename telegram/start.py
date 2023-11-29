@@ -1,11 +1,16 @@
 import telebot
-from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember
+from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember, eraselist
 from settings import TOKEN
 
 
 bot = telebot.TeleBot(TOKEN)
 
 # Aguarda a inserção dos comandos espeficificados
+@bot.message_handler(commands=['apagar'])
+def send_welcome(message):
+    eraselist()
+    bot.reply_to(message, "Lista Apagada")
+
 @bot.message_handler(commands=['listar'])
 def send_welcome(message):
 
