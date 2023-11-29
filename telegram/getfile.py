@@ -50,4 +50,4 @@ def eraselist():
     arq = open('/root/listmembers.txt', 'w+')
     arq.write("")
     new =  open("/root/newmembers.txt", "w+")
-    new.write("")
+    new.write("0\n")
