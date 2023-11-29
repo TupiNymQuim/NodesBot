@@ -17,7 +17,7 @@
 
 
 ## How to use the Scraper API:
-#### Prerequsites
+#### Prerequisites
 -  Python 3.8 or newer
 -  Google Chrome and Chrome Driver
 #### Setup
