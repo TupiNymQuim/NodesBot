@@ -16,7 +16,7 @@
 4) Run the app using `python3 start.py`
 
 
-## How to use the Scraper API:
+## How to install the Scraper API:
 #### Prerequisites
 -  Python 3.8 or newer
 -  Google Chrome and Chrome Driver
