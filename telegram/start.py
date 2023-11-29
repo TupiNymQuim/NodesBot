@@ -1,11 +1,17 @@
 import telebot
 from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember, eraselist
 from settings import TOKEN
-
+from scraper import  getBS, getRoutingScore, getHourScore, getTitle
 
 bot = telebot.TeleBot(TOKEN)
 
-# Aguarda a inserção dos comandos espeficificados
+@bot.message_handler(commands=['nodes'])
+def send_welcome(message):
+    bs = getBS("https://mixnet.explorers.guru/mixnode/7PvubVkboJQm881PxAJR6oBkMB6f8R1Au55tQjnmTasr")
+    routing = getRoutingScore(bs)
+    hour = getHourScore(bs)
+    title = getTitle(bs)
+    bot.reply_to(message, f"{title}\nAvgScore: {routing} HourScore: {hour}")
 @bot.message_handler(commands=['apagar'])
 def send_welcome(message):
     eraselist()
@@ -15,7 +21,6 @@ def send_welcome(message):
 def send_welcome(message):
 
     chat_id = message.chat.id
-    # Responde o usuário que inseriu o comando
     size = getnewmembers() - 1
     text = ""
     while (size >= 0):
