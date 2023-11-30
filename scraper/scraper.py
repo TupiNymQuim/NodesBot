@@ -30,6 +30,10 @@ def getHourScore(bs):
     rs = bs.findAll('p', {'class':'chakra-text css-1fe1nli'})
     return (rs[0].get_text())
 
+def getTotalStake(bs):
+    rs = bs.findAll('p', {'class':'chakra-text css-9hpz1u'})
+    return (rs[0].get_text())
+
 def getSaturation(bs):
     rs = bs.findAll('p', {'class':'chakra-text css-lbk3c9'})
     return (rs[0].get_text())
@@ -40,10 +44,11 @@ def getBS(html):
     html = driver.page_source
     bs = BeautifulSoup(html, 'html.parser')
     info = []
-    key = ['title', 'hourscore', 'routingscore', 'saturation']
+    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation']
     info.append(getTitle(bs))
     info.append(getHourScore(bs))
     info.append(getRoutingScore(bs))
+    info.append(getTotalStake(bs))
     info.append(getSaturation(bs))
     ret = dict(zip(key, info))
     return (ret)
