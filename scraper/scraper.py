@@ -30,6 +30,10 @@ def getHourScore(bs):
     rs = bs.findAll('p', {'class':'chakra-text css-1fe1nli'})
     return (rs[0].get_text())
 
+def getSaturation(bs):
+    rs = bs.findAll('p', {'class':'chakra-text css-lbk3c9'})
+    return (rs[0].get_text())
+
 def getBS(html):
     driver.get(html)
     time.sleep(0.3)
@@ -40,19 +44,18 @@ def getBS(html):
     info.append(getTitle(bs))
     info.append(getHourScore(bs))
     info.append(getRoutingScore(bs))
+    info.append(getSaturation(bs))
     ret = dict(zip(key, info))
     return (ret)
 
 @app.route("/tupi1")
 def tupi1():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/7PvubVkboJQm881PxAJR6oBkMB6f8R1Au55tQjnmTasr")
     print(info)
     return info
 
 @app.route("/tupi2")
 def tupi2():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/7r4gtQGLbLZfJ9m1b5LmBksxLbvAzfRy6fqzeLAdwwY6")
     print(info)
     return info
@@ -60,7 +63,6 @@ def tupi2():
 
 @app.route("/tupi3")
 def tupi3():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/DtQCygzXZsPT3D8ioqESBiWdCT2S1n11vJZWHKcMBy8t")
     print(info)
     return info
@@ -68,21 +70,18 @@ def tupi3():
 
 @app.route("/tupi4")
 def tupi4():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/7hhM8iyqXkkK7rg3gwoL2nw9wijmb5nMXH8MBtfUaban")
     print(info)
     return info
 
 @app.route("/tupi5")
 def tupi5():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/4PP6FnME2EF9hgu4Teo4BJ3q4iNfGmuAzC4gFHFY2jnK")
     print(info)
     return info
 
 @app.route("/tupi6")
 def tupi6():
-    # Carregue os dados do scrap
     info = getBS("https://mixnet.explorers.guru/mixnode/EfX72q3f5o1rTRjEJQASyWwPnRChLrBH77xL2EUgUtBX")
     print(info)
     return info
