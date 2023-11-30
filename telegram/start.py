@@ -18,7 +18,7 @@ def send_welcome(message):
     else:
         res = requests.get("http://localhost:5000/tupi" + message.text[7])
         temp = res.json()
-        text = text + temp.get("title") + "\n" + "Routing Score: " + temp.get("routingscore") + "\nHour Score: " + temp.get("hourscore") + "Total Stake: " + temp.get("totalstake") + "\nSaturation: " + temp.get("saturation") + "\n"
+        text = text + temp.get("title") + "\n" + "Routing Score: " + temp.get("routingscore") + "\nHour Score: " + temp.get("hourscore") + "\nTotal Stake: " + temp.get("totalstake") + "\nSaturation: " + temp.get("saturation") + "\n"
         
     bot.reply_to(message, f"{text}")
 
