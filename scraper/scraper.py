@@ -40,7 +40,7 @@ def getBS(html):
     html = driver.page_source
     bs = BeautifulSoup(html, 'html.parser')
     info = []
-    key = ['title', 'hourscore', 'routingscore']
+    key = ['title', 'hourscore', 'routingscore', 'saturation']
     info.append(getTitle(bs))
     info.append(getHourScore(bs))
     info.append(getRoutingScore(bs))
