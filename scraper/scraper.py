@@ -3,6 +3,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
 from flask import Flask, request
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def getHourScore(bs):
     return (rs[0].get_text())
     
 def getTotalStake(bs):
-    rs = bs.findAll('td', {'data-testid':'bond-total-amount'})
+    rs = bs.findAll('th', {'data-testid':'Stake-value'})
     return (rs[0].get_text())
     
 def getSaturation(bs):
@@ -36,22 +37,23 @@ def getLocation(bs):
     
 def getBS(html):
     driver.get(html)
-    time.sleep(0.2)
+    time.sleep(0.1)
     html = driver.page_source
     bs = BeautifulSoup(html, 'html.parser')
     info = []
     info.append(getHourScore(bs))
     info.append(getRoutingScore(bs))
     info.append(getTotalStake(bs))
-    info.append(getSaturation(bs))]
+    info.append(getSaturation(bs))
     info.append(getLocation(bs))
-    return (ret)
+    return (info)
 
 @app.route("/tupi1")
 def tupi1():
     info = getBS("https://explorer.nymtech.net/network-components/mixnode/1356")
     key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
     info.insert(0, "TupiNymQuim 1")
+    print(info)
     ret = dict(zip(key, info))
     print(ret)
     return ret
@@ -104,4 +106,4 @@ def tupi6():
    return ret
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    serve(app, host="0.0.0.0", port=5000)
