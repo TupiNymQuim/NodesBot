@@ -23,7 +23,7 @@ def list_nodes(message):
         
     bot.reply_to(message, f"{text}")
 
-@bot.message_handler(commands=['apagar'])
+@bot.message_handler(chat_id=[2092310259], commands=['apagar'])
 def delete_list(message):
     eraselist()
     bot.reply_to(message, "Lista Apagada")
@@ -73,5 +73,6 @@ def on_new_chat_member(message):
 
     setnewmembers(getnewmembers() + 1)
 
+bot.add_custom_filter(custom_filters.ChatFilter())
 
 bot.infinity_polling()
