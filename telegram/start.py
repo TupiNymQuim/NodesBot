@@ -13,12 +13,12 @@ def send_welcome(message):
         while (i < 6):
             res = requests.get("http://localhost:5000/tupi" + str(i + 1))
             temp = res.json()
-            text = text + temp.get("title") + "\n" + temp.get("routingscore") + " " + temp.get("hourscore") + " " + temp.get("totalstake") + " " + temp.get("saturation") + "\n"
+            text = text + temp.get("title") + "\n" + temp.get("routingscore") + " " + temp.get("hourscore") + " " + temp.get("totalstake") + " " + temp.get("saturation") + "\n" + temp.get("location") + "\n"
             i = i + 1
     else:
         res = requests.get("http://localhost:5000/tupi" + message.text[7])
         temp = res.json()
-        text = text + temp.get("title") + "\n" + "Routing Score: " + temp.get("routingscore") + "\nHour Score: " + temp.get("hourscore") + "\nTotal Stake: " + temp.get("totalstake") + "\nSaturation: " + temp.get("saturation") + "\n"
+        text = text + temp.get("title") + "\n" + "Routing Score: " + temp.get("routingscore") + "\nHour Score: " + temp.get("hourscore") + "\nTotal Stake: " + temp.get("totalstake") + "\nSaturation: " + temp.get("saturation") + "\nLocation: " + temp.get("location")
         
     bot.reply_to(message, f"{text}")
 
