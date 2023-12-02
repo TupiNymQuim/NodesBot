@@ -6,7 +6,7 @@ from settings import TOKEN
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['nodes'])
-def send_welcome(message):
+def list_nodes(message):
     i = 0
     text = ""
     if (len(message.text) < 7):
@@ -24,12 +24,12 @@ def send_welcome(message):
     bot.reply_to(message, f"{text}")
 
 @bot.message_handler(commands=['apagar'])
-def send_welcome(message):
+def delete_list(message):
     eraselist()
     bot.reply_to(message, "Lista Apagada")
 
 @bot.message_handler(commands=['listar'])
-def send_welcome(message):
+def show_list(message):
 
     chat_id = message.chat.id
     size = getnewmembers() - 1
@@ -41,13 +41,13 @@ def send_welcome(message):
 
 
 @bot.message_handler(commands=['sortear'])
-def send_welcome(message):
+def random_list(message):
     chat_id = message.chat.id
     winner = randommember()
     bot.send_message(chat_id, f"O Vencedor do sorteio foi: {winner}")
 
 @bot.message_handler(commands=['joined'])
-def send_welcome(message):
+def joined_list(message):
     # Responde o usuário que inseriu o comando
     bot.reply_to(message, "Tivemos " + str(getnewmembers()) + " novos membros.")
 
