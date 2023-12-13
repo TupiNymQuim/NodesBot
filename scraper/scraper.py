@@ -1,109 +1,78 @@
 import time
-from selenium import webdriver
+import json
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from selenium.webdriver.chrome.options import Options
 from flask import Flask, request
 from waitress import serve
 
 app = Flask(__name__)
 
-options = Options()
-options.add_argument('--headless=new')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox-')
-options.add_argument('--disable-dev-shm-usage')
-
-driver = webdriver.Chrome(options=options)
-
-def getRoutingScore(bs):
-    rs = bs.findAll('p', {'id':'avgUptime'})
-    return (rs[0].get_text())
-
-def getHourScore(bs):
-    rs = bs.findAll('p', {'id':'nodePerformance'})
-    return (rs[0].get_text())
+def getInfo(title, bs):
+    total_stake = str(float(bs['pledge_amount']['amount'])/1000000 + float(bs['total_delegation']['amount'])/1000000)
+    avg_uptime = str(bs['avg_uptime'])
+    node_performance = str(float(bs['node_performance']['most_recent']) * 100)
+    location = bs['location']['country_name']
+    key = ['title', 'avg_uptime', 'node_performance', 'total_stake', 'location']
+    res = []
+    res.insert(0, title)
+    res.insert(1, avg_uptime)
+    res.insert(2, node_performance)
+    res.insert(3, total_stake)
+    res.insert(4, location)
+    ret = dict(zip(key, res))
+    return  ret
     
-def getTotalStake(bs):
-    rs = bs.findAll('th', {'data-testid':'Stake-value'})
-    return (rs[0].get_text())
-    
-def getSaturation(bs):
-    rs = bs.findAll('p', {'id':'stake-saturation-progress-bar'})
-    return (rs[0].get_text())
-    
-def getLocation(bs):
-    rs = bs.findAll('th', {'data-testid':'Location-value'})
-    return (rs[0].get_text())
-    
-def getBS(html):
-    driver.get(html)
-    time.sleep(0.1)
-    html = driver.page_source
-    bs = BeautifulSoup(html, 'html.parser')
-    info = []
-    info.append(getHourScore(bs))
-    info.append(getRoutingScore(bs))
-    info.append(getTotalStake(bs))
-    info.append(getSaturation(bs))
-    info.append(getLocation(bs))
-    return (info)
 
 @app.route("/tupi1")
 def tupi1():
-    info = getBS("https://explorer.nymtech.net/network-components/mixnode/1356")
-    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-    info.insert(0, "TupiNymQuim 1")
-    print(info)
-    ret = dict(zip(key, info))
-    print(ret)
-    return ret
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1356")
+    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+    title = 'TupiNymQuim 1'
+    res = getInfo(title, bs)
+    return res
 
 @app.route("/tupi2")
 def tupi2():
-    info = getBS("https://explorer.nymtech.net/network-components/mixnode/1357")
-    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-    info.insert(0, "TupiNymQuim 2")
-    ret = dict(zip(key, info))
-    print(ret)
-    return ret
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1357")
+    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+    title = 'TupiNymQuim 2'
+    res = getInfo(title, bs)
+    return res
 
 
 @app.route("/tupi3")
 def tupi3():
-    info = getBS("https://explorer.nymtech.net/network-components/mixnode/1359")
-    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-    info.insert(0, "TupiNymQuim 3")
-    ret = dict(zip(key, info))
-    print(ret)
-    return ret
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1359")
+    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+    title = 'TupiNymQuim 3'
+    res = getInfo(title, bs)
+    return res
 
 
 @app.route("/tupi4")
 def tupi4():
-    info = getBS("https://explorer.nymtech.net/network-components/mixnode/1365")
-    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-    info.insert(0, "TupiNymQuim 4")
-    ret = dict(zip(key, info))
-    print(ret)
-    return ret
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1365")
+    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+    title = 'TupiNymQuim 4'
+    res = getInfo(title, bs)
+    return  res
 
 @app.route("/tupi5")
 def tupi5():
-    info = getBS("https://explorer.nymtech.net/network-components/mixnode/1362")
-    key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-    info.insert(0, "TupiNymQuim 5")
-    ret = dict(zip(key, info))
-    print(ret)
-    return ret
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1362")
+    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+    title = 'TupiNymQuim 5'
+    res = getInfo(title, bs)
+    return res
+
 
 @app.route("/tupi6")
 def tupi6():
-   info = getBS("https://explorer.nymtech.net/network-components/mixnode/1368")
-   key = ['title', 'hourscore', 'routingscore', 'totalstake', 'saturation', 'location']
-   info.insert(0, "TupiNymQuim 6")
-   ret = dict(zip(key, info))
-   print(ret)
-   return ret
+   info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1368")
+   bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
+   title = 'TupiNymQuim 6'
+   res = getInfo(title, bs)
+   return res
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=5000)
