@@ -33,6 +33,6 @@
 #### Prerequisites
 -  Python 3.8 or newer
 #### Setup
-1) Browse to the api folder using `cd api`
+1) Browse to the api folder using `cd handler`
 1) Install the requirements using `pip install -r requirements.txt`
-2) Run the app using `python3 api.py`
+2) Run the app using `python3 handler.py`
