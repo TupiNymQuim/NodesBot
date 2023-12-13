@@ -14,13 +14,13 @@ def list_nodes(message):
         while (i < 6):
             res = requests.get("http://localhost:5000/tupi" + str(i + 1))
             temp = res.json()
-            text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("routingscore") + "\nRouting Score: " + temp.get("hourscore") + "%\nTotal Stake: " + temp.get("totalstake")[:6] + "\nSaturation: " + temp.get("saturation") + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
+            text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake")[:6] + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
             i = i + 1
     else:
         res = requests.get("http://localhost:5000/tupi" + message.text[7])
         temp = res.json()
         print(temp)
-        text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("routingscore") + "\nRouting Score: " + temp.get("hourscore") + "%\nTotal Stake: " + temp.get("totalstake") + "\nSaturation: " + temp.get("saturation") + "\nLocation: " + temp.get("location")
+        text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
         
     bot.reply_to(message, f"{text}")
 
