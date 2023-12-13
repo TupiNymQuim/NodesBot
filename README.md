@@ -7,7 +7,7 @@
 
 #### Prerequisites
 - Python3.8 or newer
-- A Discord Token API. (Get it at [Discord Developer Portal]([https://web.telegram.org/k/#@BotFather](https://discord.com/developers/applications)))
+- A Discord Token API. (Get it at [Discord Developer Portal](https://discord.com/developers/applications))
   
 #### Setup
 1) Browse to the discord folder using `cd discord`
