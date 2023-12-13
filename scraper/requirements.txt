@@ -1,3 +1,2 @@
-selenium
 beautifulsoup4
 flask
