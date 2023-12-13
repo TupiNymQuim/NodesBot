@@ -16,10 +16,11 @@ def list_nodes(message):
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake")[:6] + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
             i = i + 1
-    elif (message.text[7:10] == '-id']:
+    elif (message.text[7:10] == '-id'):
         try:
-            res = requests.get("https://localhost:5000/mixnodes/" + message.text[11:]).json()
-            text = text + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
+            res = requests.get("http://localhost:5000/mixnodes/" + message.text[11:])
+            temp = res.json()
+            text = "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
         except:
             text = "invalid id"
     else:
