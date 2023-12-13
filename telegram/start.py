@@ -16,12 +16,20 @@ def list_nodes(message):
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake")[:6] + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
             i = i + 1
+    elif (message.text[7:10] == '-id']:
+        try:
+            res = requests.get("https://localhost:5000/mixnodes/" + message.text[11:]).json()
+            text = text + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
+        except:
+            text = "invalid id"
     else:
-        res = requests.get("http://localhost:5000/tupi" + message.text[7])
-        temp = res.json()
-        print(temp)
-        text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
-        
+        try:
+            res = requests.get("http://localhost:5000/tupi" + message.text[7])
+            temp = res.json()
+            print(temp)
+            text = temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
+        except:
+            text = "invalid arguments"
     bot.reply_to(message, f"{text}")
 
 @bot.message_handler(chat_id=[2092310259], commands=['apagar'])
