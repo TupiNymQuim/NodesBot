@@ -26,22 +26,12 @@ A bot to show real-time node status and other utilities for TupiNymQuim
 | :---------- | :--------- | :---------------------------------- |
 | `nodeid` | `string` | **Required**. Node ID|
 
-## Authors
-[@vitorsantanna2](https://github.com/vitorsantanna2)
-
-## Contributions
-Contributions and Suggestions are always welcome!
-
-Open a pull request or issue.
-
 ## Demo
 
 ![Demo](https://github.com/TupiNymQuim/IncognitoBot/assets/95882160/eec24c81-920c-47e7-8965-bf3d0f7974e0)
 ## Features
 
 - View node status
-
-
 
 ## Environment Variables
 
@@ -90,6 +80,16 @@ If you have any feedback, please let us know via tupinymquim@gmail.com
     1) Browse to the api folder using `cd handler`
     1) Install the requirements using `pip install -r requirements.txt`
     2) Run the app using `python3 handler.py`
+
+
+## Authors
+[@vitorsantanna2](https://github.com/vitorsantanna2)
+
+## Contributions
+Contributions and Suggestions are always welcome!
+
+Open a pull request or issue.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
