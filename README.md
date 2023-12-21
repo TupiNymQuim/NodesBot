@@ -1,8 +1,8 @@
 
-# Incognito Bot
+# Nodes Bot
 
 ![Version](https://img.shields.io/badge/version-0.0.2-blue)
-![GitHub Issues](https://img.shields.io/github/issues/tupinymquim/IncognitoBot.svg) 
+![GitHub Issues](https://img.shields.io/github/issues/tupinymquim/NodesBot.svg) 
 ![Live Demo](https://img.shields.io/badge/status-online-blue.svg)
 
 <img src="https://github.com/TupiNymQuim/incognito_bot_t/assets/95882160/145a4f4e-fcdf-47e1-aa88-b426c68ebb4c" width=200 height=200></img>
