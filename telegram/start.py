@@ -27,8 +27,27 @@ def list_nodes(message):
         try:
             res = requests.get("http://localhost:5000/tupi" + message.text[7])
             temp = res.json()
-            print(temp)
             text = temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
+        except:
+            text = "invalid arguments"
+    bot.reply_to(message, f"{text}")
+
+@bot.message_handler(commands=['gateways'])
+def list_gateways(message):
+    i = 0
+    text = ""
+    if (len(message.text) < 10):
+        while (i < 8):
+            res = requests.get("http://localhost:5000/gateway" + str(i + 1))
+            temp = res.json()
+            print(temp)
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\n"
+            i = i + 1
+    else:
+        try:
+            res = requests.get("http://localhost:5000/gateway" + message.text[10])
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\n"
         except:
             text = "invalid arguments"
     bot.reply_to(message, f"{text}")
