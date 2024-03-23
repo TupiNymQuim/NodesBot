@@ -1,7 +1,7 @@
 
 # Nodes Bot
 
-![Version](https://img.shields.io/badge/version-0.0.2-blue)
+![Version](https://img.shields.io/badge/version-0.0.3-blue)
 ![GitHub Issues](https://img.shields.io/github/issues/tupinymquim/NodesBot.svg) 
 ![Live Demo](https://img.shields.io/badge/status-online-blue.svg)
 
@@ -31,7 +31,8 @@ A bot to show real-time node status and other utilities for TupiNymQuim
 ![Demo](https://github.com/TupiNymQuim/IncognitoBot/assets/95882160/eec24c81-920c-47e7-8965-bf3d0f7974e0)
 ## Features
 
-- View node status
+- View Node status
+- View Gateway status
 
 ## Environment Variables
 
