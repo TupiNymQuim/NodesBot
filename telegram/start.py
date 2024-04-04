@@ -1,4 +1,7 @@
+import sys
+sys.path.append('/root/NodesBot/')
 import telebot
+import utils.utils as utils
 from telebot import custom_filters
 import requests
 from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember, eraselist
@@ -6,6 +9,36 @@ from settings import TOKEN
 
 bot = telebot.TeleBot(TOKEN)
 
+@bot.message_handler(commands=['grantees'])
+def list_grantees(message):
+    size = utils.get_size_gateways()
+    gateways = utils.get_identity_key()
+    i = 0
+    text = " "
+    while (i < (size / 4)):
+        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
+        temp = res.json()
+        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+        i = i + 1
+    bot.reply_to(message,  f"{text}" + "Página 1")
+    while (i < (size / 4)):
+        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
+        temp = res.json()
+        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+        i = i + 1
+    bot.reply_to(message, f"{text}" + "Página 2")
+    while (i < (size / 4)):
+        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
+        temp = res.json()
+        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+        i = i + 1
+    bot.reply_to(message, f"{text}" + "Página 3")
+    while (i < (size / 4)):
+        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
+        temp = res.json()
+        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+        i = i + 1
+    bot.reply_to(message, f"{text}" + "Página 4")
 @bot.message_handler(commands=['nodes'])
 def list_nodes(message):
     i = 0
@@ -40,10 +73,19 @@ def list_gateways(message):
         while (i < 8):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
-            print(temp)
             text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
             i = i + 1
+    elif (message.text[10:13] == '-id'):
+        print("entrou aqui")
+        try:
+            res = requests.get("http://localhost:5001/gateways/" + message.text[14:])
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            i = i + 1
+        except:
+            text = "invalid arguments"
     else:
+        print("entrou aqui também")
         try:
             res = requests.get("http://localhost:5000/gateway" + message.text[10])
             temp = res.json()
@@ -98,7 +140,7 @@ def on_new_chat_member(message):
         addnewmember(first_name)
         user_name = first_name
     # Envia uma mensagem ao grupo
-    bot.send_message(chat_id, f"Olá, {user_name}!\nSeja bem-vindo ao canal oficial do Squad TupiNymQuim!\nAcesse nossa página em: https://tupinymquim.github.io\nEstá procurando um node para delegar seus nym tokens e contribuir para a privacidade no mundo? Veja a nossa familia de nodes em: https://tupinymquim.github.io/nodes/\nQuer ficar por dentro do que a TupiNymQuim tem feito de contribuições? Veja em https://tupinymquim.github.io/contribuicoes/")
+    bot.send_message(chat_id, f"Olá, {user_name}!\nSeja bem-vindo ao canal oficial do Squad TupiNymQuim!\nAcesse nossa página em: https://tupinymquim.com\nEstá procurando um node para delegar seus nym tokens e contribuir para a privacidade no mundo? Veja a nossa familia de nodes em: https://tupinymquim.com/nodes/\nQuer ficar por dentro do que a TupiNymQuim tem feito de contribuições? Veja em https://tupinymquim.com/contribuicoes/")
 
     setnewmembers(getnewmembers() + 1)
 

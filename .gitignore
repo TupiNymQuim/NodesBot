@@ -6,7 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-LATAM/
+utils/gateways.txt
+utils/hosts.txt
 
 # Distribution / packaging
 .Python
