@@ -12,6 +12,15 @@ def get_identity_key():
         return "Not found"
 
 
+def get_gtw_id(gtwid):
+    try:
+        with open("/root/NodesBot/utils/gtw.txt") as file:
+            gtws_id = file.readlines()
+        return gtws_id[(int)(gtwid) - 1]
+    except IOError as e:
+        print("Error:", e)
+        return "Not found"
+
 def get_nodes_id(nodeid):
     try:
         with open("/root/NodesBot/utils/nodes.txt") as file:
