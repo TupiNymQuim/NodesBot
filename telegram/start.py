@@ -76,7 +76,6 @@ def list_gateways(message):
             text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
             i = i + 1
     elif (message.text[10:13] == '-id'):
-        print("entrou aqui")
         try:
             res = requests.get("http://localhost:5001/gateways/" + message.text[14:])
             temp = res.json()
@@ -85,7 +84,6 @@ def list_gateways(message):
         except:
             text = "invalid arguments"
     else:
-        print("entrou aqui também")
         try:
             res = requests.get("http://localhost:5000/gateway" + message.text[10])
             temp = res.json()
