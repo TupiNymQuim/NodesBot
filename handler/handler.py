@@ -1,4 +1,7 @@
+import sys
+sys.path.append('/root/NodesBot/')
 import json
+import utils.utils as utils
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from flask import Flask, request
@@ -267,56 +270,14 @@ def gateway8():
     res = getGateway(bshealth, bsscore, bsroles, bsexit, title)
     return  res
 
-@app.route("/tupi1")
-def tupi1():
-    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1356")
+@app.route("/tupi<nodeid>")
+def tupi(nodeid):
+    identifier = utils.get_nodes_id(nodeid)
+    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/" + identifier)
     bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-    title = 'TupiNymQuim 1'
+    title = 'TupiNymQuim ' + nodeid
     res = getInfo(bs, title)
     return res
-
-@app.route("/tupi2")
-def tupi2():
-    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1357")
-    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-    title = 'TupiNymQuim 2'
-    res = getInfo(bs, title)
-    return res
-
-
-@app.route("/tupi3")
-def tupi3():
-    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1359")
-    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-    title = 'TupiNymQuim 3'
-    res = getInfo(bs, title)
-    return res
-
-
-@app.route("/tupi4")
-def tupi4():
-    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1365")
-    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-    title = 'TupiNymQuim 4'
-    res = getInfo(bs, title)
-    return  res
-
-@app.route("/tupi5")
-def tupi5():
-    info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1362")
-    bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-    title = 'TupiNymQuim 5'
-    res = getInfo(bs, title)
-    return res
-
-
-@app.route("/tupi6")
-def tupi6():
-   info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/1368")
-   bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
-   title = 'TupiNymQuim 6'
-   res = getInfo(bs, title)
-   return res
 
 @app.route("/mixnodes/<nodeid>")
 def mixnode(nodeid):

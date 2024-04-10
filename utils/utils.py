@@ -12,6 +12,15 @@ def get_identity_key():
         return "Not found"
 
 
+def get_nodes_id(nodeid):
+    try:
+        with open("/root/NodesBot/utils/nodes.txt") as file:
+            nodes_id = file.readlines()
+        return nodes_id[(int)(nodeid) - 1]
+    except IOError as e:
+        print("Error:", e)
+        return "Not found"
+
 def get_size_gateways():
     keys =  get_identity_key()
     return (len(keys))
