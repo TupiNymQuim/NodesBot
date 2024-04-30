@@ -48,7 +48,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Feedback
 
-If you have any feedback, please let us know via tupinymquim@gmail.com
+If you have any feedback, please let us know via dev@tupinymquim.com
 
 
 ## Installation
