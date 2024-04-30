@@ -1,4 +1,6 @@
+import filecmp
 import json
+import os
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -10,6 +12,43 @@ def get_identity_key():
     except IOError as e:
         print("Error:", e)
         return "Not found"
+
+
+def set_identity_key(identity_key):
+    if (check_key_exists(identity_key) == 1):
+        return ("Gateway already exist!")
+    remove_blank_lines() 
+    file = open("/root/NodesBot/utils/gateways.txt", 'a')
+    file.write("\n")
+    file.write(identity_key)
+    return ("Gateway added successfully!")
+            
+def remove_identity_key(identity_key):
+  filename = "/root/NodesBot/utils/gateways.txt"
+  if (check_key_exists(identity_key) == 1):
+    with open(filename, 'r') as read_file, open(filename + ".new", 'w') as write_file:
+        for line in read_file:
+            if line.strip() != identity_key:
+                write_file.write(line)
+    os.replace(filename + '.new', filename)
+    return ("Gateway Successfully removed!")
+  return ("Gateway not found!")
+    
+def remove_blank_lines():
+    filename = "/root/NodesBot/utils/gateways.txt"
+    with open(filename, 'r') as infile, open(filename + '.new', 'w') as outfile:
+        for line in infile:
+            if not line.strip():
+                continue
+            outfile.write(line)
+    os.replace(filename + '.new', filename)
+
+def check_key_exists(identity_key):
+    with open("/root/NodesBot/utils/gateways.txt", 'r') as read_file:
+        for line in read_file:
+            if line.strip() == identity_key:
+                return (1)
+        return (-1)
 
 
 def get_gtw_id(gtwid):
