@@ -86,7 +86,7 @@ def list_nodes(message):
 def list_gateways(message):
     i = 0
     text = ""
-    if (len(message.text) < 11):
+    if (len(message.text) < 10):
         while (i < 10):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
