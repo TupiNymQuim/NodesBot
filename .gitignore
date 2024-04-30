@@ -9,6 +9,7 @@ __pycache__/
 utils/gateways.txt
 utils/hosts.txt
 utils/nodes.txt
+utils/gtw.txt
 
 # Distribution / packaging
 .Python

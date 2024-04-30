@@ -96,7 +96,6 @@ def mixnode(nodeid):
     info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/"+ nodeid)
     bs = json.loads(str(BeautifulSoup(info, 'html.parser')))
     res = getInfo(bs)
-    print(res)
     return res
 
 

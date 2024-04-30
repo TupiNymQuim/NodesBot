@@ -9,6 +9,23 @@ from settings import TOKEN
 
 bot = telebot.TeleBot(TOKEN)
 
+@bot.message_handler(commands=['add'])
+def add_gateway(message):
+    bot.reply_to(message, utils.set_identity_key(message.text[5:]))
+
+@bot.message_handler(commands=['remove'])
+def remove_gateway(message):
+    bot.reply_to(message, utils.remove_identity_key(message.text[8:].strip()))
+
+@bot.message_handler(commands=['list'])
+def list_gateway(message):
+    i = 0
+    temp = ""
+    while (i < utils.get_size_gateways()):
+        temp =  temp + utils.get_identity_key()[i]
+        i = i + 1
+    bot.reply_to(message, f"{temp}")
+
 @bot.message_handler(commands=['grantees'])
 def list_grantees(message):
     size = utils.get_size_gateways()
@@ -70,7 +87,7 @@ def list_gateways(message):
     i = 0
     text = ""
     if (len(message.text) < 10):
-        while (i < 8):
+        while (i < 9):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"

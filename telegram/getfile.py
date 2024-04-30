@@ -7,7 +7,7 @@ def getnewmembers():
         arq = open("/home/scraper/newmembers.txt", "w+")
         arq.write("0\n")
         return (0)
-    i = 0;
+    i = 0
     result = (arq.read())
     size = len(result)
     value = ""
