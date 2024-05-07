@@ -87,7 +87,7 @@ def list_gateways(message):
     i = 0
     text = ""
     if (len(message.text) < 11):
-        while (i < 10):
+        while (i < 11):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
