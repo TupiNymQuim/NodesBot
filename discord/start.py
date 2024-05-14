@@ -37,4 +37,32 @@ async def nodes(message, *nodes):
 async def commands(message):
     await message.reply(f"Tupinymquim only taught me how to say hello so far, I will soon have more features.")
 
+@IncognitoBot.command()
+async def gateways(message):
+    i = 0
+    text = ""
+    if (len(message.text) < 11):
+        while (i < 11):
+            res = requests.get("http://localhost:5000/gateway" + str(i + 1))
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            i = i + 1
+    elif (message.text[10:13] == '-id'):
+        try:
+            res = requests.get("http://localhost:5001/gateways/" + message.text[14:])
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            i = i + 1
+        except:
+            text = "invalid arguments"
+    else:
+        try:
+            res = requests.get("http://localhost:5000/gateway" + message.text[10:])
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy")
+        except:
+            text = "invalid arguments"
+    await message.reply(text)
+
+
 IncognitoBot.run(DISCORD_API_TOKEN)

@@ -13,7 +13,7 @@ def getnewmembers():
     value = ""
     while (i < size - 1):
         value = value + result[i]
-        i = i + 1;
+        i = i + 1
 
     try:
         return (int(value))

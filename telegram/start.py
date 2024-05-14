@@ -31,31 +31,16 @@ def list_grantees(message):
     size = utils.get_size_gateways()
     gateways = utils.get_identity_key()
     i = 0
+    j = 0
     text = " "
-    while (i < (size / 4)):
-        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
-        temp = res.json()
-        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
-        i = i + 1
-    bot.reply_to(message,  f"{text}" + "Página 1")
-    while (i < (size / 4)):
-        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
-        temp = res.json()
-        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
-        i = i + 1
-    bot.reply_to(message, f"{text}" + "Página 2")
-    while (i < (size / 4)):
-        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
-        temp = res.json()
-        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
-        i = i + 1
-    bot.reply_to(message, f"{text}" + "Página 3")
-    while (i < (size / 4)):
-        res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
-        temp = res.json()
-        text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
-        i = i + 1
-    bot.reply_to(message, f"{text}" + "Página 4")
+    while (j < 5):
+        while (i < (size / 5)):
+            res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
+            temp = res.json()
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            i += 1
+        j += 1
+        bot.reply_to(message,  f"{text}" + "Página" + (str)(j))
 @bot.message_handler(commands=['nodes'])
 def list_nodes(message):
     i = 0
@@ -91,13 +76,13 @@ def list_gateways(message):
         while (i < 11):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
-            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nConfig Score: " + temp.get("config_score") + "\n-----------------------------------\n"
             i = i + 1
     elif (message.text[10:13] == '-id'):
         try:
             res = requests.get("http://localhost:5001/gateways/" + message.text[14:])
             temp = res.json()
-            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nConfig Score: " + temp.get("config_score") + "\n-----------------------------------\n"
             i = i + 1
         except:
             text = "invalid arguments"
@@ -105,7 +90,7 @@ def list_gateways(message):
         try:
             res = requests.get("http://localhost:5000/gateway" + message.text[10:])
             temp = res.json()
-            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy")
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nConfig Score: " + temp.get("config_score") + "\n-----------------------------------\n"
         except:
             text = "invalid arguments"
     bot.reply_to(message, f"{text}")

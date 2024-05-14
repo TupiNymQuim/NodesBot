@@ -32,24 +32,16 @@ def getGateway(bshealth, bsscore, bsroles, bsexit, title):
     nr = str(bsroles['network_requester_enabled'])
     ip_router = str(bsroles['ip_packet_router_enabled'])
     exit = str(bsexit['enabled'])
-    key = ['title', 'status', 'uptime', 'most_recent', 'network_requester_enabled', 'ip_packet_router_enabled', 'exit_policy']
+    key = ['title', 'status', 'uptime', 'most_recent', 'config_score']
     res = []
     res.insert(0, title)
     res.insert(1, status)
     res.insert(2, uptime)
     res.insert(3, most_recent)
-    if (nr == "True"):
-        res.insert(4, "✅")
+    if (nr == "True" and ip_router == "True" and exit == "True"):
+        res.insert(4, "🐼")
     else:
         res.insert(4, "❌")
-    if (ip_router == "True"):
-        res.insert(5, "✅")
-    else:
-        res.insert(5, "❌")
-    if (exit == "True"):
-        res.insert(6, "✅")
-    else:
-        res.insert(6, "❌")
     ret = dict(zip(key, res))
     return ret
 
@@ -64,15 +56,13 @@ def gateways(gtwid):
         exit = urlopen("http://"+host+":8080/api/v1/network-requester/exit-policy")
         score = urlopen("https://validator.nymtech.net/api/v1/status/gateway/"+gateway_id+"/report")
     except:
-        key = ['title', 'status', 'uptime', 'most_recent', 'network_requester_enabled', 'ip_packet_router_enabled', 'exit_policy']
+        key = ['title', 'status', 'uptime', 'most_recent', 'config_score']
         res = []
         res.insert(0, title)
         res.insert(1, "down")
         res.insert(2, "0")
         res.insert(3, "0")
         res.insert(4, "❌")
-        res.insert(5, "❌")
-        res.insert(6, "❌")
         ret = dict(zip(key, res))
         return ret
     bshealth = json.loads(str(BeautifulSoup(health, 'html.parser')))

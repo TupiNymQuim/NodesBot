@@ -13,7 +13,6 @@ def get_identity_key():
         print("Error:", e)
         return "Not found"
 
-
 def set_identity_key(identity_key):
     if (check_key_exists(identity_key) == 1):
         return ("Gateway already exist!")
