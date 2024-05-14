@@ -37,7 +37,7 @@ def list_grantees(message):
         while (i < (size / 5)):
             res = requests.get("http://localhost:5001/gateways/" + gateways[i].strip())
             temp = res.json()
-            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nNetwork Requester: "  + temp.get("network_requester_enabled") + "\nIp Packet Router: " + temp.get("ip_packet_router_enabled") + "\nExit Policy: " + temp.get("exit_policy") + "\n-----------------------------------\n"
+            text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nConfig Score: " + temp.get("config_score") + "\n-----------------------------------\n"
             i += 1
         j += 1
         bot.reply_to(message,  f"{text}" + "Página" + (str)(j))
@@ -47,20 +47,20 @@ def list_nodes(message):
     text = ""
     if (len(message.text) < 7):
         while (i < 6):
-            res = requests.get("http://localhost:5000/tupi" + str(i + 1))
+            res = requests.get("http://localhost:5000/nodes" + str(i + 1))
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake")[:6] + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
             i = i + 1
     elif (message.text[7:10] == '-id'):
         try:
-            res = requests.get("http://localhost:5000/mixnodes/" + message.text[11:])
+            res = requests.get("http://localhost:5001/mixnodes/" + message.text[11:])
             temp = res.json()
             text = "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
         except:
             text = "invalid id"
     else:
         try:
-            res = requests.get("http://localhost:5000/tupi" + message.text[7])
+            res = requests.get("http://localhost:5000/nodes" + message.text[7])
             temp = res.json()
             text = temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake") + "\nLocation: " + temp.get("location")
         except:
