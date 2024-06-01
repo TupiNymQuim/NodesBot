@@ -3,6 +3,31 @@ import os
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+
+def get_item():
+    try:
+        with open("/root/NodesBot/utils/casadigital.txt") as file:
+            key = file.readlines()
+        return key
+    except IOError as e:
+        print("Error:", e)
+        return "Not found"
+
+def set_item(item):
+    file = open("/root/NodesBot/utils/casadigital.txt", 'a')
+    file.write("\n")
+    file.write(str(len(get_item()) + 1) + " " + item)
+    return ("Item added successfully!")
+
+def remove_item(item):
+  filename = "/root/NodesBot/utils/casadigital.txt"
+  with open(filename, 'r') as read_file, open(filename + ".new", 'w') as write_file:
+        for line in read_file:
+            if line.split()[1] != item:
+                write_file.write(line)
+        os.replace(filename + '.new', filename)
+        return ("Student Successfully removed!")
+
 def get_identity_key():
     try:
         with open("/root/NodesBot/utils/gateways.txt") as file:
@@ -84,6 +109,36 @@ def get_host_by_identity_key(data, identity_key):
     for item in data:
         if item["bond"]["gateway"]["identity_key"] == identity_key:
             return item["bond"]["gateway"]["host"]
+    return "Not Found"
+
+def get_nr_by_identity_key(data, identity_key):
+    for item in data:
+        if item["bond"]["gateway"]["identity_key"] == identity_key:
+            try:
+                if (item["self_described"]["network_requester"]["address"]):
+                    return True
+            except:
+                    return False
+    return "Not Found"
+
+def get_ip_by_identity_key(data, identity_key):
+    for item in data:
+        if item["bond"]["gateway"]["identity_key"] == identity_key:
+            try:
+                if (item["self_described"]["ip_packet_router"]["address"]):
+                    return True
+            except:
+                    return False
+    return "Not Found"
+
+def get_policy_by_identity_key(data, identity_key):
+    for item in data:
+        if item["bond"]["gateway"]["identity_key"] == identity_key:
+            try:
+                if (item["self_described"]["network_requester"]["uses_exit_policy"]):
+                    return True
+            except:
+                    return False
     return "Not Found"
 
 def get_all_host_by_identity_key(data, identity_key):

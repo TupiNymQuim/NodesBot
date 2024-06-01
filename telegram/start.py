@@ -4,7 +4,6 @@ import telebot
 import utils.utils as utils
 from telebot import custom_filters
 import requests
-from getfile import getnewmembers, setnewmembers, addnewmember, listnewmember, randommember, eraselist
 from settings import TOKEN
 
 bot = telebot.TeleBot(TOKEN)
@@ -46,7 +45,7 @@ def list_nodes(message):
     i = 0
     text = ""
     if (len(message.text) < 7):
-        while (i < 6):
+        while (i < 7):
             res = requests.get("http://localhost:5000/nodes" + str(i + 1))
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Avg Score: " + temp.get("avg_uptime") + "\nRouting Score: " + temp.get("node_performance") + "%\nTotal Stake: " + temp.get("total_stake")[:6] + "\nLocation: " + temp.get("location") + "\n" + "----------------------------------\n"
@@ -73,7 +72,7 @@ def list_gateways(message):
     text = ""
 
     if (len(message.text) < 11):
-        while (i < 11):
+        while (i < 12):
             res = requests.get("http://localhost:5000/gateway" + str(i + 1))
             temp = res.json()
             text = text + temp.get("title") + "\n" + "Status: " + temp.get("status") + "\n" + "Uptime: " + temp.get("uptime") + "\nPerformance: " + temp.get("most_recent") + "%\nConfig Score: " + temp.get("config_score") + "\n-----------------------------------\n"

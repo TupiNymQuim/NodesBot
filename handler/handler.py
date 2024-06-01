@@ -15,10 +15,11 @@ def gateways(gtwid):
     title = 'Gateway ' + gtwid + ' - ' + utils.get_gtw_id(gtwid).split()[2]
     gateway_id = utils.get_gtw_id(gtwid).split()[0]
     host = utils.get_gtw_id(gtwid).split()[1]
-    res = gtw.get_gateways(title, gateway_id, host)
+    data = utils.get_data()
+    res = gtw.get_gateways(title, gateway_id, host, data)
     return  res
     
-@app.route("/tupi<nodeid>")
+@app.route("/nodes<nodeid>")
 def nodes(nodeid):
     identifier = utils.get_nodes_id(nodeid)
     info = urlopen("https://explorer.nymtech.net/api/v1/mix-node/" + identifier)
@@ -26,7 +27,6 @@ def nodes(nodeid):
     title = 'TupiNymQuim ' + nodeid
     res = gtw.getInfo(bs, title)
     return res
-
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=5000)
